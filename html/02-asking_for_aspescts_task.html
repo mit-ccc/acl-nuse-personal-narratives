@@ -1,0 +1,387 @@
+<!-- You must include this JavaScript file -->
+
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<link rel="stylesheet" media="screen" href="https://ddvx2zdcut4vw.cloudfront.net/assets/application-c6bbd5228d4b2574a79e8828bf98dfe4b2f37ab3cc3052173436ac49f2b434f0.css">
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<style>
+table.desc {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td.desc, th.desc {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr.desc:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+#crowd-form-content {
+  background-color: white
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+  var watched_dict = {"story-A-audio": new Set(),
+                      "story-B-audio": new Set(),};
+
+  var last_added = {"story-A-audio": Date.now(),
+                    "story-B-audio": Date.now(),};
+
+  var last_watched_second = {"story-A-audio": 0,
+                            "story-B-audio": 0};
+
+  var audio_ids = ["story-A-audio", "story-B-audio"];
+
+  function float2int (value) {
+      return value | 0;
+  };
+
+  function pauseReproduction(video_id) {
+    var vid = document.getElementById(video_id);
+    vid.pause();
+    var p = document.getElementById(video_id+'-not-listening');
+    p.hidden = false;
+    var p = document.getElementById(video_id+'-listening');
+    p.hidden = true;
+  };
+
+  function volumeChange(video_id){
+    var p = document.getElementById(video_id);
+    p.volume = 1;
+  };
+
+  function checkReproduction(video_id) {
+    var vid = document.getElementById(video_id);
+
+    if (vid.muted){
+      pauseReproduction(video_id);
+    };
+
+    var date_now = Date.now();
+    var current_second = float2int(vid.currentTime);
+
+    var other_videos = audio_ids.slice();
+
+    for( var i = other_videos.length-1; i--;){
+        if ( other_videos[i] === video_id) other_videos.splice(i, 1);
+    };
+
+    var watched_a_second = date_now - last_added[video_id] > 800;
+    var watched_the_last_second = current_second - last_watched_second[video_id] < 2;
+
+    var vid_0 = document.getElementById(other_videos[0]);
+    var only_video_playing = !vid.paused && vid_0.paused;
+    var not_muted = !vid.muted;
+
+    var listening = false;
+    var already_watched = watched_dict[video_id].has(current_second);
+    var just_watching = watched_a_second && watched_the_last_second && only_video_playing && not_muted;
+
+    if(just_watching){
+      last_added[video_id] = date_now;
+      last_watched_second[video_id] = current_second;
+      watched_dict[video_id].add(current_second);
+      checkFullyWatched(video_id);
+      //console.log(video_id, vid.currentTime, vid.duration,
+      //            watched_dict[video_id].size, checkFullyWatched(video_id));
+
+      listening = true;
+    };
+
+    if (listening){
+      var p = document.getElementById(video_id+'-not-listening');
+      p.hidden = true;
+      var p = document.getElementById(video_id+'-listening');
+      p.hidden = false;
+
+      var p = document.getElementById(other_videos[0]+'-not-listening');
+      p.hidden = false;
+      var p = document.getElementById(other_videos[0]+'-listening');
+      p.hidden = true;
+
+    };
+ 
+  };
+
+  function checkFullyWatched(video_id){
+    var vid = document.getElementById(video_id);
+    var is_fully_checked = watched_dict[video_id].size >= float2int(vid.duration);
+
+    if (is_fully_checked){
+      var checkbox_id = video_id + '-checkbox';
+      var checkbox = document.getElementById(checkbox_id);
+      checkbox.checked = "true";
+      checkbox.disabled = "false";
+
+    }
+    return is_fully_checked;
+  };
+
+  window.onload = function () {
+    var vidA = document.getElementById("story-A-audio");
+    vidA.ontimeupdate = function() {checkReproduction("story-A-audio")};
+    vidA.onpause = function() { pauseReproduction("story-A-audio") };
+    vidA.onvolumechange = function() { volumeChange("story-A-audio") };
+
+    var vidB = document.getElementById("story-B-audio");
+    vidB.ontimeupdate = function() {checkReproduction("story-B-audio")};
+    vidB.onpause = function() { pauseReproduction("story-B-audio") };
+    vidB.onvolumechange = function() { volumeChange("story-B-audio") };
+
+  };
+
+</script>
+
+<crowd-form answer-format="flatten-objects">
+
+    <short-instructions>
+
+      <p>Sharing personal narratives is a fundamental aspect of human social behavior as it helps define our life experiences. We can tell stories and rely on our experiences to understand their context and find similarities and differences among these narratives.</p>
+
+      <p>For this HIT, you will be ask to <b>carefully and fully listen</b> two personal narratives (around 60 seconds each). You'll be asked to determine the aspects in which these personal narratives are similar to each other, and briefly explain why</b>. Think of each aspect as one or a couple of keywords.</p>
+
+      <p>You will be asked to focus on the content and not in the speakers' characteristics such as accent or gender.</p>
+
+      <p>We are intentionally not giving examples of aspects and reasons because we want to understand your perspective. Please think of your explanation as a quick argument that would convince someone else who is doing the same task.</p>
+
+
+      <p>You can do <b>up to 5 HITs</b> of this batch and <b>please make sure you do not do the same PAIR-ID more than once</b>. You won't be compensated for doing the same PAIR-ID more than once.
+      </p>
+
+      <p style="font-size: 14; color: orange"><b>Please find important notes in the full description.</b></p>
+
+    </short-instructions>
+
+
+    <full-instructions header="">
+      <h2>Detailed Instructions</h2>
+
+      <p>Sharing personal narratives is a fundamental aspect of human social behavior as it helps define our life experiences. We can tell stories and rely on our experiences to understand their context and find similarities and differences among these narratives.</p>
+
+      <p>For this HIT, you will be ask to <b>carefully and fully listen</b> two personal narratives (around 60 seconds each). You'll be asked to determine the aspects in which these personal narratives are similar to each other, and briefly explain why</b>. Think of each aspect as one or a couple of keywords.</p>
+
+      <p>You will be asked to focus on the content and not in the speakers' characteristics such as accent or gender.</p>
+
+      <p>We are intentionally not giving examples of aspects and reasons because we want to understand your perspective. Please think of your explanation as a quick argument that would convince someone else who is doing the same task.</p>
+
+
+      <p>You can do <b>up to 5 HITs</b> of this batch and <b>please make sure you do not do the same PAIR-ID more than once</b>. You won't be compensated for doing the same PAIR-ID more than once.
+      </p>
+
+      <h2>Tips</h2>
+      <ul>
+        <li>You'll find three automatic checkboxes. These will be automatically checked when you fully listen to each story at least once without skipping parts. Feel free to listen to them more than once after your first time.</li>
+        <li>Avoid overthinking your decision. Pick the most obvious choice for you.</li>
+      </ul>
+
+      <br>
+      <h2>Important notes</h2>
+      <ul>
+        <li>For this task, you need to focus on the content and not in the speakers' characteristics such as accent or gender.</li>
+        <li>We do not expect that you listen each story more than once. Feel free to do it but that's not a requirement for this task.</li>
+        <li>We will accept hits based on task completeness.</li>
+        <li>Additionally, please meet these three (redundant but better to have them explicitly) requirements for us to compensate you.
+        	<ul>
+		        <li>You won't be compensated for doing the same PAIR-ID more than once.</li>
+            <li>You won't be compensated for doing more than 5 HITS of this batch.</li>
+		        <li>You must listen to both stories fully at least once.</li>
+		        <li>You must explain the reason behind your choice concisely.</li>
+        	</ul>
+        </li>
+        <li>For next batch, we will qualify worker based on ground truth data and task completeness.</li>
+        <li>Note that each HIT has been allocated 120 minutes but should take less than <b>7 minutes</b> in total. We don't want the HIT to expire for you, which is why we have set it to 120 minutes.</li>
+        <li>This HIT is part of a MIT scientific research project. Your decision to complete this HIT is voluntary. There is no way for us to identify you. The only information we will have, in addition to your responses, is the time at which you completed the task. The results of the research may be presented at scientific meetings or published in scientific journals. Clicking on the 'SUBMIT' button on the bottom of this page indicates that you are at least 18 years of age and agree to complete this HIT voluntarily.</li>
+      </ul>
+
+
+    </full-instructions>
+      <!--classification-target-->
+
+    <div name="task">
+      <p style="font-size:14;">
+      In order to get credit for this HIT, you <b>must read full instructions, listend all audios fully and answer carefully</b>. We will accept hits based on task completeness.</b>
+
+      <p>You can do <b>up to 5 HITs</b> of this batch and <b>please make sure you do not do the same PAIR-ID more than once</b>. You won't be compensated for doing the same PAIR-ID more than once.
+      </p>
+
+      <div class="form-control"><br>
+
+      <h1>In what aspects are the following personal narratives similars?</h1><br>
+
+      <h2>PAIR-ID ${internal_hit_id}</h2>
+
+
+      <table style="width: 100%">
+          <td>
+            <h2>Story A</h2>
+            <audio id="story-A-audio" controls="" style="width: 80%" controlsList="nodownload">
+                <source src="${story_A_audio_url}" type="audio/mpeg" />
+            </audio><br><br>
+            <p hidden id="story-A-audio-not-listening" style="font-size:14; width: 80%; text-align: right; color: orange">Not listening.</p>
+            <p hidden id="story-A-audio-listening" style="font-size:14; width: 80%; text-align: right; color: green">Listening.</p>
+            <div class="form-group"><label for="notes-story-A" style="font-size:14">Notes about <b>story A</b>:</label><textarea class="form-control" style="font-size:14; width: 90%" id="notes-story-A" rows=4 name="notes-story-A" placeholder="You can optionally use this space to take notes about story A."></textarea></div><br>
+          </td>
+          <td>
+            <h2>Story B</h2>
+            <audio id="story-B-audio" controls="" style="width: 80%" controlsList="nodownload">
+                <source src="${story_B_audio_url}"" type="audio/mpeg" />
+            </audio><br><br>
+            <p hidden id="story-B-audio-not-listening" style="font-size:14; width: 80%; text-align: right; color: orange">Not listening.</p>
+            <p hidden id="story-B-audio-listening" style="font-size:14; width: 80%; text-align: right; color: green">Listening.</p>
+            <div class="form-group"><label for="notes-story-B" style="font-size:14">Notes about <b>story B</b>:</label><textarea class="form-control" style="font-size:14; width: 90%" id="notes-story-B" rows=4 name="notes-story-B" placeholder="You can optionally use this space to take notes about story B."></textarea></div><br>
+          </td>
+      </table>
+
+
+    <!-- Multiple Checkboxes -->
+    <div>
+      <div class="form-group">
+        <label class="col-md-16 control-label" for="checkboxes"><h2>Automatic checkboxes</h2>
+          <div class="col-md-16">
+          The following checkboxes will be automatically checked when you fully listen to each story at least once without skipping parts. Feel free to listen to them more than once.
+          </div>
+        </label>
+        <div class="col-md-16">
+        <div class="checkbox">
+          <label for="checkboxes-1">
+            <input required type="checkbox" name="checkboxes" id="story-A-audio-checkbox" value="2" disabled="true">
+            I have fully listened the story A.
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="checkboxes-2">
+            <input required type="checkbox" name="checkboxes" id="story-B-audio-checkbox" value="3" disabled="true">
+            I have fully listened the story B.
+          </label>
+        </div>
+        </div>
+      </div>
+    </div><br>
+
+
+      <h2>In what aspects are the following personal narratives similars?</h2>
+      <p>Please rank 3 aspects in which these stories are similar, and briefly explain why.
+        <ul>
+          <li>Aspect: Think of each aspect as one or a couple of keywords.</li>
+          <li>Explanation: Quick argument that would explain the aspect that you detected.</li>
+        </ul>
+      </p>
+      <br>
+      <table style="width: 100%">
+          <td style="width: 10%">
+            <div class="form-group"><label for="aspect-1" style="font-size:14">Aspect</label>
+
+              <textarea class="form-control" id="aspect-1" rows=2 name="aspect-1" placeholder="Top 1" required></textarea>
+              <textarea class="form-control" id="aspect-2" rows=2 name="aspect-2" placeholder="Top 2" required></textarea>
+              <textarea class="form-control" id="aspect-3" rows=2 name="aspect-3" placeholder="Top 3" required></textarea>
+              <textarea class="form-control" id="aspect-4" rows=2 name="aspect-4" placeholder="Top 4"></textarea>
+              <textarea class="form-control" id="aspect-5" rows=2 name="aspect-5" placeholder="Top 5"></textarea>
+
+            </div>
+          </td>
+          <td style="width: 5%">
+          </td>
+          <td>
+            <div class="form-group" style="width: 70%"><label for="reason-1" style="font-size:14">Explanation</label>
+
+              <textarea class="form-control" id="reason-1" rows=2 name="reason-1" placeholder="Please explain how both personal narratives are similar at aspect Top 1." required></textarea>
+
+              <textarea class="form-control" id="reason-2" rows=2 name="reason-2" placeholder="Please explain how both personal narratives are similar at aspect Top 2." required></textarea>
+
+              <textarea class="form-control" id="reason-3" rows=2 name="reason-3" placeholder="Please explain how both personal narratives are similar at aspect Top 3." required></textarea>
+
+              <textarea class="form-control" id="reason-4" rows=2 name="reason-4" placeholder="(Optional) Please explain how both personal narratives are similar at aspect Top 4."></textarea>
+
+              <textarea class="form-control" id="reason-5" rows=2 name="reason-5" placeholder="(Optional) Please explain how both personal narratives are similar at aspect Top 5."></textarea>
+          </td>
+      </table>
+
+
+    <br><br>
+    <div>
+      <!-- Multiple Radios -->
+      <div class="form-group">
+        <label class="col-md-16 control-label" for="radios"><h2>Do you have any particular training in stories/narratives?</h2></label>
+        <p>Do you have any level of education (or have self-taught yourself) in narratives, storytelling, or any area that, in your opinion, might make you more qualified than others to analyze stories?</p>
+        <div class="col-md-16">
+        <div class="radio">
+          <label for="radios-3" required>
+            <input required type="radio" name="radios-2" id="radios-3" value="4">
+            Yes
+          </label>
+        </div>
+        <div class="radio">
+          <label for="radios-4">
+            <input type="radio" name="radios-2" id="radios-4" value="5">
+            No
+          </label>
+        </div>
+        </div>
+      </div>
+    </div>
+      <div class="form-group"><label for="expert" style="font-size:14">Previous experience</label> (optional) <textarea class="form-control" style="font-size:14; width: 95%" id="expert" rows=2 name="expert" placeholder="If your previous response was yes, please, feel free to share more."></textarea></div>
+
+      <div class="form-group"><label for="feedback" style="font-size:14">Feedback</label> (optional) <textarea class="form-control" style="font-size:14; width: 95%" id="feedback" rows=3 name="feedback" placeholder="We are happy to have your feedback on this task."></textarea></div>
+
+
+      <div class="slidecontainer">Move the slider bar to the center if you responded carefully.<input required class="slider" type="range" name="slider-1" value="100" style="width: 98%"></div>
+      <br><br><br><br>
+
+
+      </div>
+
+
+    </div>
+
+      <!--/classification-target-->
+
+  </crowd-classifier>
+
+
+</crowd-form>

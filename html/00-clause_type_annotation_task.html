@@ -1,0 +1,1029 @@
+<!-- You must include this JavaScript file -->
+
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<link rel="stylesheet" media="screen" href="https://ddvx2zdcut4vw.cloudfront.net/assets/application-c6bbd5228d4b2574a79e8828bf98dfe4b2f37ab3cc3052173436ac49f2b434f0.css">
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<style>
+table.desc {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td.desc, th.desc {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr.desc:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+
+
+<script type="text/javascript">
+
+  function removeElement(elem) {
+     var parent = elem.parentNode;
+     parent.removeChild(elem);
+     parent.parentNode.removeChild(parent);
+  }
+
+
+  window.onload = function () {
+    for (var i = 0; i < 25; i++) {
+      var elem = document.getElementById("clause_"+i.toString());
+      var test = elem.children[0].children[0].textContent;
+      if (test[0] == '$' || test.length == 0){
+        //console.log("clause_"+i.toString(), elem.text);
+        removeElement(elem);
+      }
+    }
+
+    //setTimeout(myFunction, 500)
+
+  };
+
+  /*function myFunction() {
+      var shadow_root = document.body.firstElementChild.shadowRoot;
+      var bar = shadow_root.querySelector('.awsui-app-layout__navigation');
+      bar.setAttribute('style', "width: 450px; margin-left: 0px;");
+  }*/
+
+
+</script>
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+
+
+    <short-instructions>
+      <a href="https://drive.google.com/drive/folders/1UeZ1dlFtfnCegJp39ZybzG5EYh32rcYS?usp=sharing" target="_blank">View full instructions - PDF version</a>
+
+      <br><br>
+      <p><i>"William Labov describes narrative as having two functions: referential and evaluative, with its referential functions orienting and grounding a story in its contextual world by referencing events in sequential order as they originally occurred, and its evaluative functions describing the storyteller's purpose in telling the story." (Wikipedia).</i></p>
+      <p>For this HIT, you will read a story and label each demarked clause as one of the below described classes. Two examples of fully labeled stories are here:</p> 
+
+      <p style="font-size:14;">
+      In order to get credit for this HIT, you must read <b>full instructions and all the sentences fully</b> and answer carefully.
+      </p><br>
+
+      <h2>Classes</h2>
+
+      <table class="desc">
+        <tr class="desc">
+          <th class="desc">Class</th>
+          <th class="desc">Definition</th>
+          <th class="desc">One example</th>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Orientation</b></td>
+          <td class="desc">Referential clauses which serve to orient the reader in respect to person, place, time, story setting, and behavioral situation.<br><br>These clauses provide the "who?," "where?," and "when" of the narrative.</td>
+          <td class="desc">
+              <p>"I was down on campus today gearing up at Moe's,"</p><br>
+              <p style="color: red">Find more examples in full instructions.</p><br>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Stative local context</b></td>
+          <td class="desc">Clauses for distinguishing stative descriptions of the world.</td>
+          <td class="desc">
+              <p>"Nowhere was a driver to be found."</p><br>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Action</b></td>
+          <td class="desc">Clauses that indicate causal relationships.<br><br>These clauses rovide a sequence of events; the 'what happened' of the story.</td>
+          <td class="desc">
+              <p>"Once done, I used Winamp to transfer the remaining files."</p><br>
+          </td>
+        </tr>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Implied action</b></td>
+          <td class="desc">Clauses, which do not explicitly mention an action or event, but imply one that is necessary to maintain the causal or temporal coherence of the remaining story.<br><br>Implied actions are often passive constructions that describe a state of the world that could only be true if an action had taken place.</td>
+          <td class="desc">
+              <p>"and decided to go take a tour."</p><br>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Evaluation</b></td>
+          <td class="desc">Clauses describing the story characters' self-awareness or emotional reactions to (or evaluation of) the events.<br><br>These clauses provide the "so what?" of the narrative. Evaluation can also be done subtly: for instance, lexical intensifiers are a type of semantically defined evaluation.</td>
+          <td class="desc">
+              <p>"It was a really fun and interesting experience"</p><br>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Stative consequence</b></td>
+          <td class="desc">Clauses that describe the state of the world that has resulted as a consequence of an action, but does not directly evaluate the goals, intentions or desires of the participants.</td>
+          <td class="desc">
+              <p>"the big stink is gone the next morning."</p><br>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Not story</b></td>
+          <td class="desc">Stories in this task are mostly transcribed from audio. Please tag as Not Store any clauses that seem like they are not part of the story or represent transcription noise.</td>
+          <td class="desc">
+              <p>-</p>
+          </td>
+        </tr>
+      </table>
+
+    </short-instructions>
+
+
+    <full-instructions header="">
+      <h2>Detailed Instructions</h2>
+      <p><i>"William Labov describes narrative as having two functions: referential and evaluative, with its referential functions orienting and grounding a story in its contextual world by referencing events in sequential order as they originally occurred, and its evaluative functions describing the storyteller's purpose in telling the story." (Wikipedia).</i></p>
+      <p>For this HIT, you will read a story and label each demarked clause as one of the below described classes. Two examples of fully labeled stories are here:</p> 
+      
+      <h3>Example 1</h3>
+      <table class="desc">
+        <tr class="desc">
+          <th class="desc">Class</th>
+          <th class="desc">Clause</th>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">Last evening's muscle pull had stiffened up during the night, making it necessary to commute by express bus this morning,</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">but everyone at work was very understanding</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">and it was a pretty quiet day anyhow,</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Action</td>
+          <td class="desc">so I worked through lunch</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Action</td>
+          <td class="desc">and left early,</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">as well as deciding to take tomorrow off to rest the leg and bum so I'll be okay for the trip to and from Mom's on Saturday.</td>
+        </tr>
+      </table>
+
+      <br>
+      <h3>Example 2</h3>
+      <table class="desc">
+        <tr class="desc">
+          <th class="desc">Class</th>
+          <th class="desc">Clause</th>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">I never planned to have a stroke at the age of 28.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">Let me rephrase that.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">I never planned to have a stroke ever.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">But if I had to have one, 28 was a pretty good age for it.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Evaluation</td>
+          <td class="desc">I knew this from experience.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">I was sitting next to my grandmother when she had her first stroke, back in the early 1980s.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">She was in her 60s.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">I was 11 or 12.</td>
+        </tr>
+        <tr class="desc">
+          <td class="desc">Orientation</td>
+          <td class="desc">We were in the back yard at my aunt and uncle's house on Long Island.</td>
+        </tr>
+      </table>
+
+    <br><br>
+    <h2>Classes</h2>
+
+    <table class="desc">
+        <tr class="desc">
+          <th class="desc">Class</th>
+          <th class="desc" style="width: 33%">Definition</th>
+          <th class="desc">Examples</th>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Orientation</b></td>
+          <td class="desc">Referential clauses which serve to orient the reader in respect to person, place, time, story setting, and behavioral situation.<br><br>These clauses provide the "who?," "where?," and "when" of the narrative.</td>
+          <td class="desc">
+              <p>"She hates that."</p><br>
+              <p>"I was down on campus today gearing up at Moe's,"</p><br>
+              <p>"and it was about videos of me being up on the Web."</p><br>
+              <p>"And in fact when I was doing my PhD was the worst."</p><br>
+              <p>"Our visit was brief as Frank had many things on his To Do List"</p><br>
+              <p>"So, unfortunately I couldn't make the Games industry party tonight for two reasons."</p>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Stative local context</b></td>
+          <td class="desc">Clauses for distinguishing stative descriptions of the world.</td>
+          <td class="desc">
+              <p>"Nowhere was a driver to be found."</p><br>
+              <p>"So now I have passed 4 test in one week!!!!"</p><br>
+              <p>"Then it is time for the cutting of the hair."</p><br>
+              <p>"The traffic sign pointed to Sutherlin and Roseburg,"</p><br>
+              <p>"I've been on the faculty for about 19 years."</p><br>
+              <p>"I can't say there was like some grand design. There certainly wasn't."</p>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Action</b></td>
+          <td class="desc">Clauses that indicate causal relationships.<br><br>These clauses rovide a sequence of events; the 'what happened' of the story.</td>
+          <td class="desc">
+              <p>"I said."</p><br>
+              <p>"and so now I had to order a case of it online."</p><br>
+              <p>"Once done, I used Winamp to transfer the remaining files."</p><br>
+              <p>"Later that evening I met Jen & Dallas, my other roommates."</p><br>
+              <p>"He would run every time the water touched his feet at first,"</p><br>
+              <p>"setting up folding chairs and blankets while their kids ran around screaming themselves into exhaustion."</p>
+          </td>
+        </tr>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Implied action</b></td>
+          <td class="desc">Clauses, which do not explicitly mention an action or event, but imply one that is necessary to maintain the causal or temporal coherence of the remaining story.<br><br>Implied actions are often passive constructions that describe a state of the world that could only be true if an action had taken place.</td>
+          <td class="desc">
+              <p>"and decided to go take a tour."</p><br>
+              <p>"After that, we decided to walk some more."</p><br>
+              <p>"and didn't want to miss a day of riding."</p><br>
+              <p>", um, `` Well, you know, `` I think I want to study philosophy. ''"</p><br>
+              <p>"We were at the convention center in about 10 minutes and amazingly had our badges about 10 minutes after that."</p><br>
+              <p>"This week, we decided to take advantage and watch The Muppet Movie, a film that I hadn't seen in at least 15 years."</p>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Evaluation</b></td>
+          <td class="desc">Clauses describing the story characters' self-awareness or emotional reactions to (or evaluation of) the events.<br><br>These clauses provide the "so what?" of the narrative. Evaluation can also be done subtly: for instance, lexical intensifiers are a type of semantically defined evaluation.</td>
+          <td class="desc">
+              <p>"It was a really fun and interesting experience"</p><br>
+              <p>"That's a Saturday night worth having, I tell you."</p><br>
+              <p>"What is it about cheese that sets my loins aflame?"</p><br>
+              <p>"and I have to say, it IS different in West Memphis."</p><br>
+              <p>"And I kind of really thought, what the heck am I doing?"</p><br>
+              <p>"I know you love to study human behavior and psychology."</p>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Stative consequence</b></td>
+          <td class="desc">Clauses that describe the state of the world that has resulted as a consequence of an action, but does not directly evaluate the goals, intentions or desires of the participants.</td>
+          <td class="desc">
+              <p>"Stuck."</p><br>
+              <p>"and now I know!"</p><br>
+              <p>"but there was something under my car."</p><br>
+              <p>"the big stink is gone the next morning."</p><br>
+              <p>"and it turns out I just destroyed his bike."</p><br>
+              <p>"and I'm stuck with three stinking dead mice."</p>
+          </td>
+        </tr>
+        <tr class="desc">
+          <td class="desc"><b>Not story</b></td>
+          <td class="desc">Stories in this task are mostly transcribed from audio. Please tag as Not Store any clauses that seem like they are not part of the story or represent transcription noise.</td>
+          <td class="desc">
+              <p>-</p>
+          </td>
+        </tr>
+      </table>
+
+
+      <br>
+      <h2>Tips</h2>
+      <lu>
+        <li>In order to get credit for this HIT, you must read all the sentences fully and answer carefully.</li>
+        <li>Errors between class pairs (Orientation, Local context), (Action, Implied Action), and (Evaluation, Stative consequence) will not decrease your chance of acceptance.</li>
+        <li>Assign labels as precisely as possible according to their underlying function of each clause in the story.</li>
+        <li>Ignore grammatical errors and awkward workings as long as they do not influence your decision making.</li>
+        <li>Avoid overthinking the decision in your classification. Pick the most obvious option.</li>
+      </lu>
+
+      <br>
+      <h2>Important notes</h2>
+      <lu>
+        <li>We will accept hits based on the inter-annotator agreement between assignments.</li>
+        <li>For next batch, we will qualify worker based on ground truth data and based on the inter-annotator agreement between assignments.</li>
+        <li>Note that each HIT has been allocated 120 minutes but should take less than 20 minutes in total. We don't want the HIT to expire for you, which is why we have set it to 120 minutes.</li>
+        <li>This HIT is part of a MIT scientific research project. Your decision to complete this HIT is voluntary. There is no way for us to identify you. The only information we will have, in addition to your responses, is the time at which you completed the task. The results of the research may be presented at scientific meetings or published in scientific journals. Clicking on the 'SUBMIT' button on the bottom of this page indicates that you are at least 18 years of age and agree to complete this HIT voluntarily.</li>
+      </lu>
+
+
+
+
+    </full-instructions>
+
+    <div name="task">
+      <p style="font-size:14;">
+      In order to get credit for this HIT, you <b>must read full instructions and all the sentences fully</b> and answer carefully. You can do multiple HITs within each batch.
+      <p style="font-size:14;">We will accept hits based on workers overall <b>inter-annotator agreement</b> between assignments.</p>
+      </p><br>
+
+      <h1>This is the story for this task:</h1><br>
+      <div>
+        <p style="font-size:14; text-align:justify;"><i>${original_story}</i></p>
+      </div><br><br>
+
+      <div class="row" id="workContent">
+        <div class="col-sm-8 col-sm-offset-1">
+
+        <div id="clause_0_p" style="display:">
+        <div id="clause_0" class="form-control"><label for="question-0" style="font-size:14; color: black; text-align:justify;">1.&nbsp;&nbsp;<i>${clause_0}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-0.0"><input required type="radio" name="radios-0" id="radios-0.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-0.1"><input type="radio" name="radios-0" id="radios-0.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-0.2"><input type="radio" name="radios-0" id="radios-0.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-0.3"><input type="radio" name="radios-0" id="radios-0.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-0.4"><input type="radio" name="radios-0" id="radios-0.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-0.5"><input type="radio" name="radios-0" id="radios-0.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-0.6"><input type="radio" name="radios-0" id="radios-0.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+        <div id="clause_1_p" style="display:">
+        <div id="clause_1" class="form-control"><label for="question-1" style="font-size:14; color: black; text-align:justify;">2.&nbsp;&nbsp;<i>${clause_1}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-1.0"><input required type="radio" name="radios-1" id="radios-1.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-1.1"><input type="radio" name="radios-1" id="radios-1.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-1.2"><input type="radio" name="radios-1" id="radios-1.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-1.3"><input type="radio" name="radios-1" id="radios-1.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-1.4"><input type="radio" name="radios-1" id="radios-1.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-1.5"><input type="radio" name="radios-1" id="radios-1.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-1.6"><input type="radio" name="radios-1" id="radios-1.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+        <div id="clause_2_p" style="display:">
+        <div id="clause_2" class="form-control"><label for="question-2" style="font-size:14; color: black; text-align:justify;">3.&nbsp;&nbsp;<i>${clause_2}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-2.0"><input required type="radio" name="radios-2" id="radios-2.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-2.1"><input type="radio" name="radios-2" id="radios-2.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-2.2"><input type="radio" name="radios-2" id="radios-2.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-2.3"><input type="radio" name="radios-2" id="radios-2.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-2.4"><input type="radio" name="radios-2" id="radios-2.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-2.5"><input type="radio" name="radios-2" id="radios-2.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-2.6"><input type="radio" name="radios-2" id="radios-2.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_3_p" style="display:">
+        <div id="clause_3" class="form-control"><label for="question-3" style="font-size:14; color: black; text-align:justify;">4.&nbsp;&nbsp;<i>${clause_3}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-3.0"><input required type="radio" name="radios-3" id="radios-3.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-3.1"><input type="radio" name="radios-3" id="radios-3.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-3.2"><input type="radio" name="radios-3" id="radios-3.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-3.3"><input type="radio" name="radios-3" id="radios-3.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-3.4"><input type="radio" name="radios-3" id="radios-3.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-3.5"><input type="radio" name="radios-3" id="radios-3.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-3.6"><input type="radio" name="radios-3" id="radios-3.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_4_p" style="display:">
+        <div id="clause_4" class="form-control"><label for="question-4" style="font-size:14; color: black; text-align:justify;">5.&nbsp;&nbsp;<i>${clause_4}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-4.0"><input required type="radio" name="radios-4" id="radios-4.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-4.1"><input type="radio" name="radios-4" id="radios-4.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-4.2"><input type="radio" name="radios-4" id="radios-4.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-4.3"><input type="radio" name="radios-4" id="radios-4.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-4.4"><input type="radio" name="radios-4" id="radios-4.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-4.5"><input type="radio" name="radios-4" id="radios-4.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-4.6"><input type="radio" name="radios-4" id="radios-4.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_5_p" style="display:">
+        <div id="clause_5" class="form-control"><label for="question-5" style="font-size:14; color: black; text-align:justify;">6.&nbsp;&nbsp;<i>${clause_5}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-5.0"><input required type="radio" name="radios-5" id="radios-5.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-5.1"><input type="radio" name="radios-5" id="radios-5.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-5.2"><input type="radio" name="radios-5" id="radios-5.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-5.3"><input type="radio" name="radios-5" id="radios-5.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-5.4"><input type="radio" name="radios-5" id="radios-5.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-5.5"><input type="radio" name="radios-5" id="radios-5.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-5.6"><input type="radio" name="radios-5" id="radios-5.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+        <div class="slidecontainer">Move the slider bar to the center if you are responding carefully.<input required class="slider" type="range" name="slider-1" value="100" style=""></div>
+        <br><br>
+
+        <div id="clause_6_p" style="display:">
+        <div id="clause_6" class="form-control"><label for="question-6" style="font-size:14; color: black; text-align:justify;">7.&nbsp;&nbsp;<i>${clause_6}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-6.0"><input required type="radio" name="radios-6" id="radios-6.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-6.1"><input type="radio" name="radios-6" id="radios-6.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-6.2"><input type="radio" name="radios-6" id="radios-6.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-6.3"><input type="radio" name="radios-6" id="radios-6.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-6.4"><input type="radio" name="radios-6" id="radios-6.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-6.5"><input type="radio" name="radios-6" id="radios-6.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-6.6"><input type="radio" name="radios-6" id="radios-6.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_7_p" style="display:">
+        <div id="clause_7" class="form-control"><label for="question-7" style="font-size:14; color: black; text-align:justify;">8.&nbsp;&nbsp;<i>${clause_7}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-7.0"><input required type="radio" name="radios-7" id="radios-7.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-7.1"><input type="radio" name="radios-7" id="radios-7.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-7.2"><input type="radio" name="radios-7" id="radios-7.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-7.3"><input type="radio" name="radios-7" id="radios-7.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-7.4"><input type="radio" name="radios-7" id="radios-7.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-7.5"><input type="radio" name="radios-7" id="radios-7.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-7.6"><input type="radio" name="radios-7" id="radios-7.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_8_p" style="display:">
+        <div id="clause_8" class="form-control"><label for="question-8" style="font-size:14; color: black; text-align:justify;">9.&nbsp;&nbsp;<i>${clause_8}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-8.0"><input required type="radio" name="radios-8" id="radios-8.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-8.1"><input type="radio" name="radios-8" id="radios-8.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-8.2"><input type="radio" name="radios-8" id="radios-8.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-8.3"><input type="radio" name="radios-8" id="radios-8.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-8.4"><input type="radio" name="radios-8" id="radios-8.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-8.5"><input type="radio" name="radios-8" id="radios-8.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-8.6"><input type="radio" name="radios-8" id="radios-8.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_9_p" style="display:">
+        <div id="clause_9" class="form-control"><label for="question-9" style="font-size:14; color: black; text-align:justify;">10.&nbsp;&nbsp;<i>${clause_9}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-9.0"><input required type="radio" name="radios-9" id="radios-9.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-9.1"><input type="radio" name="radios-9" id="radios-9.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-9.2"><input type="radio" name="radios-9" id="radios-9.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-9.3"><input type="radio" name="radios-9" id="radios-9.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-9.4"><input type="radio" name="radios-9" id="radios-9.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-9.5"><input type="radio" name="radios-9" id="radios-9.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-9.6"><input type="radio" name="radios-9" id="radios-9.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div> <!--CHECK id, for, etc-->
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_10_p" style="display:">
+        <div id="clause_10" class="form-control"><label for="question-10" style="font-size:14; color: black; text-align:justify;">11.&nbsp;&nbsp;<i>${clause_10}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-10.0"><input required type="radio" name="radios-10" id="radios-10.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-10.1"><input type="radio" name="radios-10" id="radios-10.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-10.2"><input type="radio" name="radios-10" id="radios-10.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-10.3"><input type="radio" name="radios-10" id="radios-10.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-10.4"><input type="radio" name="radios-10" id="radios-10.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-10.5"><input type="radio" name="radios-10" id="radios-10.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-10.6"><input type="radio" name="radios-10" id="radios-10.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_11_p" style="display:">
+        <div id="clause_11" class="form-control"><label for="question-11" style="font-size:14; color: black; text-align:justify;">12.&nbsp;&nbsp;<i>${clause_11}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-11.0"><input required type="radio" name="radios-11" id="radios-11.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-11.1"><input type="radio" name="radios-11" id="radios-11.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-11.2"><input type="radio" name="radios-11" id="radios-11.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-11.3"><input type="radio" name="radios-11" id="radios-11.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-11.4"><input type="radio" name="radios-11" id="radios-11.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-11.5"><input type="radio" name="radios-11" id="radios-11.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-11.6"><input type="radio" name="radios-11" id="radios-11.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_12_p" style="display:">
+        <div id="clause_12" class="form-control"><label for="question-12" style="font-size:14; color: black; text-align:justify;">13.&nbsp;&nbsp;<i>${clause_12}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-12.0"><input required type="radio" name="radios-12" id="radios-12.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-12.1"><input type="radio" name="radios-12" id="radios-12.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-12.2"><input type="radio" name="radios-12" id="radios-12.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-12.3"><input type="radio" name="radios-12" id="radios-12.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-12.4"><input type="radio" name="radios-12" id="radios-12.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-12.5"><input type="radio" name="radios-12" id="radios-12.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-12.6"><input type="radio" name="radios-12" id="radios-12.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_13_p" style="display:">
+        <div id="clause_13" class="form-control"><label for="question-13" style="font-size:14; color: black; text-align:justify;">14.&nbsp;&nbsp;<i>${clause_13}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-13.0"><input required type="radio" name="radios-13" id="radios-13.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-13.1"><input type="radio" name="radios-13" id="radios-13.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-13.2"><input type="radio" name="radios-13" id="radios-13.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-13.3"><input type="radio" name="radios-13" id="radios-13.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-13.4"><input type="radio" name="radios-13" id="radios-13.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-13.5"><input type="radio" name="radios-13" id="radios-13.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-13.6"><input type="radio" name="radios-13" id="radios-13.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_14_p" style="display:">
+        <div id="clause_14" class="form-control"><label for="question-14" style="font-size:14; color: black; text-align:justify;">15.&nbsp;&nbsp;<i>${clause_14}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-14.0"><input required type="radio" name="radios-14" id="radios-14.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-14.1"><input type="radio" name="radios-14" id="radios-14.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-14.2"><input type="radio" name="radios-14" id="radios-14.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-14.3"><input type="radio" name="radios-14" id="radios-14.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-14.4"><input type="radio" name="radios-14" id="radios-14.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-14.5"><input type="radio" name="radios-14" id="radios-14.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-14.6"><input type="radio" name="radios-14" id="radios-14.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_15_p" style="display:">
+        <div id="clause_15" class="form-control"><label for="question-15" style="font-size:14; color: black; text-align:justify;">16.&nbsp;&nbsp;<i>${clause_15}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-15.0"><input required type="radio" name="radios-15" id="radios-15.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-15.1"><input type="radio" name="radios-15" id="radios-15.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-15.2"><input type="radio" name="radios-15" id="radios-15.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-15.3"><input type="radio" name="radios-15" id="radios-15.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-15.4"><input type="radio" name="radios-15" id="radios-15.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-15.5"><input type="radio" name="radios-15" id="radios-15.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-15.6"><input type="radio" name="radios-15" id="radios-15.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_16_p" style="display:">
+        <div id="clause_16" class="form-control"><label for="question-16" style="font-size:14; color: black; text-align:justify;">17.&nbsp;&nbsp;<i>${clause_16}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-16.0"><input required type="radio" name="radios-16" id="radios-16.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-16.1"><input type="radio" name="radios-16" id="radios-16.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-16.2"><input type="radio" name="radios-16" id="radios-16.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-16.3"><input type="radio" name="radios-16" id="radios-16.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-16.4"><input type="radio" name="radios-16" id="radios-16.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-16.5"><input type="radio" name="radios-16" id="radios-16.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-16.6"><input type="radio" name="radios-16" id="radios-16.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_17_p" style="display:">
+        <div id="clause_17" class="form-control"><label for="question-17" style="font-size:14; color: black; text-align:justify;">18.&nbsp;&nbsp;<i>${clause_17}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-17.0"><input required type="radio" name="radios-17" id="radios-17.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-17.1"><input type="radio" name="radios-17" id="radios-17.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-17.2"><input type="radio" name="radios-17" id="radios-17.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-17.3"><input type="radio" name="radios-17" id="radios-17.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-17.4"><input type="radio" name="radios-17" id="radios-17.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-17.5"><input type="radio" name="radios-17" id="radios-17.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-17.6"><input type="radio" name="radios-17" id="radios-17.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_18_p" style="display:">
+        <div id="clause_18" class="form-control"><label for="question-18" style="font-size:14; color: black; text-align:justify;">19.&nbsp;&nbsp;<i>${clause_18}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-18.0"><input required type="radio" name="radios-18" id="radios-18.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-18.1"><input type="radio" name="radios-18" id="radios-18.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-18.2"><input type="radio" name="radios-18" id="radios-18.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-18.3"><input type="radio" name="radios-18" id="radios-18.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-18.4"><input type="radio" name="radios-18" id="radios-18.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-18.5"><input type="radio" name="radios-18" id="radios-18.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-18.6"><input type="radio" name="radios-18" id="radios-18.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_19_p" style="display:">
+        <div id="clause_19" class="form-control"><label for="question-19" style="font-size:14; color: black; text-align:justify;">20.&nbsp;&nbsp;<i>${clause_19}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-19.0"><input required type="radio" name="radios-19" id="radios-19.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-19.1"><input type="radio" name="radios-19" id="radios-19.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-19.2"><input type="radio" name="radios-19" id="radios-19.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-19.3"><input type="radio" name="radios-19" id="radios-19.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-19.4"><input type="radio" name="radios-19" id="radios-19.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-19.5"><input type="radio" name="radios-19" id="radios-19.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-19.6"><input type="radio" name="radios-19" id="radios-19.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_20_p" style="display:">
+        <div id="clause_20" class="form-control"><label for="question-20" style="font-size:14; color: black; text-align:justify;">21.&nbsp;&nbsp;<i>${clause_20}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-20.0"><input required type="radio" name="radios-20" id="radios-20.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-20.1"><input type="radio" name="radios-20" id="radios-20.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-20.2"><input type="radio" name="radios-20" id="radios-20.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-20.3"><input type="radio" name="radios-20" id="radios-20.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-20.4"><input type="radio" name="radios-20" id="radios-20.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-20.5"><input type="radio" name="radios-20" id="radios-20.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-20.6"><input type="radio" name="radios-20" id="radios-20.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_21_p" style="display:">
+        <div id="clause_21" class="form-control"><label for="question-21" style="font-size:14; color: black; text-align:justify;">22.&nbsp;&nbsp;<i>${clause_21}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-21.0"><input required type="radio" name="radios-21" id="radios-21.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-21.1"><input type="radio" name="radios-21" id="radios-21.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-21.2"><input type="radio" name="radios-21" id="radios-21.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-21.3"><input type="radio" name="radios-21" id="radios-21.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-21.4"><input type="radio" name="radios-21" id="radios-21.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-21.5"><input type="radio" name="radios-21" id="radios-21.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-21.6"><input type="radio" name="radios-21" id="radios-21.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_22_p" style="display:">
+        <div id="clause_22" class="form-control"><label for="question-22" style="font-size:14; color: black; text-align:justify;">23.&nbsp;&nbsp;<i>${clause_22}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-22.0"><input required type="radio" name="radios-22" id="radios-22.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-22.1"><input type="radio" name="radios-22" id="radios-22.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-22.2"><input type="radio" name="radios-22" id="radios-22.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-22.3"><input type="radio" name="radios-22" id="radios-22.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-22.4"><input type="radio" name="radios-22" id="radios-22.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-22.5"><input type="radio" name="radios-22" id="radios-22.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-22.6"><input type="radio" name="radios-22" id="radios-22.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_23_p" style="display:">
+        <div id="clause_23" class="form-control"><label for="question-23" style="font-size:14; color: black; text-align:justify;">24.&nbsp;&nbsp;<i>${clause_23}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-23.0"><input required type="radio" name="radios-23" id="radios-23.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-23.1"><input type="radio" name="radios-23" id="radios-23.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-23.2"><input type="radio" name="radios-23" id="radios-23.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-23.3"><input type="radio" name="radios-23" id="radios-23.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-23.4"><input type="radio" name="radios-23" id="radios-23.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-23.5"><input type="radio" name="radios-23" id="radios-23.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-23.6"><input type="radio" name="radios-23" id="radios-23.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div id="clause_24_p" style="display:">
+        <div id="clause_24" class="form-control"><label for="question-24" style="font-size:14; color: black; text-align:justify;">25.&nbsp;&nbsp;<i>${clause_24}</i></label> 
+          <br><br>
+           <div class="form-group">
+                <table style="width:100%; font-size:14">
+                  <tr>
+                    <td><label class="radio-inline" for="radios-24.0"><input required type="radio" name="radios-24" id="radios-24.0" value="0" >Orientation</label> </td>
+                    <td><label class="radio-inline" for="radios-24.1"><input type="radio" name="radios-24" id="radios-24.1" value="1" >Action</label> </td>
+                    <td><label class="radio-inline" for="radios-24.2"><input type="radio" name="radios-24" id="radios-24.2" value="2" >Evaluation</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-24.3"><input type="radio" name="radios-24" id="radios-24.3" value="3" >Local context</label> </td>
+                    <td><label class="radio-inline" for="radios-24.4"><input type="radio" name="radios-24" id="radios-24.4" value="4" >Implied action</label> </td>
+                    <td><label class="radio-inline" for="radios-24.5"><input type="radio" name="radios-24" id="radios-24.5" value="5" >Stative consequence</label> </td>
+                  </tr>
+                  <tr>
+                    <td><label class="radio-inline" for="radios-24.6"><input type="radio" name="radios-24" id="radios-24.6" value="6" >Not Story</label></td>
+                  </tr>
+                </table>
+           </div>
+        </div>
+        <br><br>
+        </div>
+
+
+        <div class="form-group"><label for="feedback" style="font-size:14">Feedback</label> (optional) <textarea class="form-control" style="font-size:14" id="feedback" rows=4 name="feedback" placeholder="We are happy to have your feedback on this task."></textarea></div>
+
+
+        <br><br>
+        
+        <div class="slidecontainer">Move the slider bar all the way to the left if you have responded carefully. <input required class="slider" type="range" name="slider" value="100" style=""></div>
+
+        <br><br><br><br>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+</crowd-form>
