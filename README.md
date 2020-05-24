@@ -36,7 +36,7 @@ We introduce the largest dataset of annotated spoken personal narratives to our 
 Find the Mechanical Turk requester HTML template for the three tasks described in the paper here:
 1. [RTN corpus annotation under Labov's framework](https://htmlpreview.github.io/?https://raw.githubusercontent.com/social-machines/acl-nuse-personal-narratives/master/html/00-clause_type_annotation_task.html)
 1. [Which one of the stories below is the most similar to the main story?](https://htmlpreview.github.io/?https://raw.githubusercontent.com/social-machines/acl-nuse-personal-narratives/master/html/01-matching_stories_task.html)
-1. [In what respect are the following stories similar?](https://htmlpreview.github.io/?https://raw.githubusercontent.com/social-machines/acl-nuse-personal-narratives/master/html/02-asking_for_aspescts_task.html)
+1. [In what aspects are the following personal narratives similar?](https://htmlpreview.github.io/?https://raw.githubusercontent.com/social-machines/acl-nuse-personal-narratives/master/html/02-asking_for_aspescts_task.html)
 
 MTurk Task 1            |  Mturk Task 2
 :-------------------------:|:-------------------------:
