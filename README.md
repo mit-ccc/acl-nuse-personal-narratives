@@ -43,6 +43,22 @@ MTurk Task 1            |  Mturk Task 2
 ![](static/task-0.png)  |  ![](static/task-1.png)
 
 
+## Citation
+
+If you use content in this repo, please consider citing us as below:
+
+```
+@article{saldias2020exploring,
+  title={Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types},
+  author={Saldias, Belen and Roy, Deb},
+  year={2020}
+  eprint={2005.12762},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL}
+}
+```
+
+
 ## Acknowledgments
 
 The authors would like to thank [Roadtrip Nation](https://roadtripnation.com) for collecting and sharing their data. We also thank Swanson et al. (2014) who shared their corpus with us, and the anonymous reviewers who provided valuable feedback. We were inspired by researchers at the [Laboratory for Social Machines (LSM) at MIT](https://www.media.mit.edu/groups/social-machines/overview/) who are passionate about storytelling. This project was funded by LSM Member companies [McKinsey & Company](https://www.mckinsey.com) and [Twitter](https://twitter.com).
