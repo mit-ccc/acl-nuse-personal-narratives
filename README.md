@@ -48,14 +48,18 @@ MTurk Task 1            |  Mturk Task 2
 If you use content in this repo, please consider citing us as below:
 
 ```
-@article{saldias2020exploring,
-  title={Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types},
-  author={Saldias, Belen and Roy, Deb},
-  year={2020}
-  eprint={2005.12762},
-  archivePrefix={arXiv},
-  primaryClass={cs.CL}
-}
+@inproceedings{saldias-roy-2020-exploring,
+    title = "Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types",
+    author = "Saldias, Belen  and
+      Roy, Deb",
+    booktitle = "Proceedings of the First Joint Workshop on Narrative Understanding, Storylines, and Events",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.nuse-1.10",
+    pages = "78--86",
+    }
 ```
 
 
