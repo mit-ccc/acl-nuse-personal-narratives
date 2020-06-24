@@ -1,6 +1,6 @@
 # Personal narratives @ ACL NUSE
 
-This repo contains supplementary material for the paper "[Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types](https://arxiv.org/pdf/2005.12762.pdf)", in proceedings of the [2020 ACL NUSE Workshop](https://www.aclweb.org/portal/content/1st-joint-workshop-narrative-understanding-storylines-and-events-nuse-acl-2020).
+This repo contains supplementary material for the paper "[Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types](https://www.aclweb.org/anthology/2020.nuse-1.10/)", in proceedings of the [2020 ACL NUSE Workshop](https://www.aclweb.org/portal/content/1st-joint-workshop-narrative-understanding-storylines-and-events-nuse-acl-2020).
 
 > Saldias, B., & Roy, D. (July, 2020) Exploring aspects of similarity between spoken personal narratives by disentangling them into narrative clause types. *Proceedings of the 2020 ACL Workshop on Narrative Understanding, Storylines, and Events* (NUSE). ACL.
 
