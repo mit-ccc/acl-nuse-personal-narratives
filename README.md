@@ -30,6 +30,14 @@ We introduce the largest dataset of annotated spoken personal narratives to our 
         Figure 1: A fragment of a personal narrative in the RTN corpus annotated by Turkers using Labov’s model.
 </p>
 
+### Download
+
+This material is made available under a Creative Commons Attribution 4.0 International License. Please attribute any use of this material to Saldias, B., & Roy, D. (2020) and cite as stated in section Citation below. To download, please either go to our [`data`](https://github.com/social-machines/acl-nuse-personal-narratives/tree/master/data) folder or use the following command:
+
+```
+wget --quiet https://raw.githubusercontent.com/social-machines/acl-nuse-personal-narratives/master/data/Saldias%26Roy-RTN_data.csv
+```
+
 
 ## Annotation tasks
 
